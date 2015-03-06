@@ -63,4 +63,7 @@ window.onload = function () {
 		document.querySelector('#y').value = '';
 	});
 
+	document.querySelector('#removeAllNodes').addEventListener('click', function () {
+		d3.select('body').select('.node').selectAll('circle').remove();
+	});
 };
