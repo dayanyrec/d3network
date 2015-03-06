@@ -1,15 +1,11 @@
 window.onload = function () {
 	var svg,
 		width = document.querySelector('.network').offsetWidth,
-		height = document.querySelector('.network').offsetHeight - document.querySelector('h2').offsetHeight,
+		height = document.querySelector('.network').offsetHeight,
 		node,
 		jsonData;
 
 	svg = d3.select('body').select('.network')
-		.attr('tabindex', 1)
-		.each(function () {
-			this.focus();
-		})
 		.append('svg')
 		.attr('width', width)
 		.attr('height', height);
@@ -38,7 +34,15 @@ window.onload = function () {
 			})
 			.attr('cy', function (d) {
 				return d.y;
-			});
+			})
+			.call(d3.behavior.drag()
+				.origin(function (d) {
+					return d;
+				})
+				.on('drag', function (d) {
+					d.x = d3.event.x, d.y = d3.event.y;
+					d3.select(this).attr('cx', d.x).attr('cy', d.y);
+				}));
 	};
 
 	getData = function () {
@@ -53,10 +57,10 @@ window.onload = function () {
 			},
 			node = d3.select('body').select('.node').selectAll('circle');
 
-
 		insertNode(node, a, 1);
 
 		document.querySelector('#x').value = '';
 		document.querySelector('#y').value = '';
 	});
+
 };
