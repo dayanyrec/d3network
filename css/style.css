@@ -14,3 +14,25 @@ svg {
 	display: block;
 	margin: 0 auto;
 }
+
+fieldset {
+	padding: 10px;
+}
+
+input[type=text] {
+	width: 30px;
+}
+
+.row {
+	display: flex;
+	height: 100%;
+}
+
+.network {
+	width: 70%;
+}
+
+.control {
+	width: 30%;
+}
+

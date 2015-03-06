@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Interactive Network Using D3.js</title>
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-	<h2>Interactive Network</h2>
 
+<body>
+	<div class="row">
+		<div class="network"></div>
+		<div class="control">
+			<h2>Interactive Network</h2>
+			<fieldset>
+				<legend>Controls</legend>
+				<label for="x">x:</label>
+				<input type="text" name="x" id="x">
+				<label for="y">y:</label>
+				<input type="text" name="y" id="y">
+				<input type="button" value="Add node" id="addNode">
+			</fieldset>
+		</div>
+	</div>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
 	<script src="js/script.js"></script>
 </body>
+
 </html>
