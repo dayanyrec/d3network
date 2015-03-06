@@ -53,6 +53,10 @@ window.onload = function () {
 			},
 			node = d3.select('body').select('.node').selectAll('circle');
 
+
 		insertNode(node, a, 1);
+
+		document.querySelector('#x').value = '';
+		document.querySelector('#y').value = '';
 	});
 };
