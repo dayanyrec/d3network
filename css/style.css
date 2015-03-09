@@ -21,6 +21,10 @@ svg {
 	stroke-width: 1.5px;
 }
 
+.link {
+	stroke: #999;
+}
+
 fieldset {
 	padding: 10px;
 	text-align: left;
