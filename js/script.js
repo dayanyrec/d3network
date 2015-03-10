@@ -3,16 +3,18 @@ window.onload = function () {
 	var svg,
 		width = document.querySelector('.network').offsetWidth,
 		height = document.querySelector('.network').offsetHeight,
-		node,
+		gnode,
 		link,
 		jsonData,
 		insertNode,
 		insertLink,
 		getData;
 
-	insertNode = function (node, data, isNew) {
+	insertNode = function (gnode, data, isNew) {
 		var newData,
-			link;
+			link,
+			node,
+			label;
 
 		if (isNew) {
 			newData = getData();
@@ -22,7 +24,24 @@ window.onload = function () {
 
 		link = d3.select('body').select('.link').selectAll('line');
 
-		node = node.data(data.nodes).enter().append('circle')
+		gnode = gnode.data(data.nodes).enter()
+			.append('g')
+			.attr('class', 'gnode');
+
+		label = gnode.append('text')
+			.attr('class', 'label')
+			.attr('x', function (d) {
+				return d.x;
+			})
+			.attr('y', function (d) {
+				return d.y - 5;
+			})
+			.text(function (d) {
+				return d.label;
+			});
+
+		node = gnode.append('circle')
+			.attr('class', 'node')
 			.attr('r', 4)
 			.attr('cx', function (d) {
 				return d.x;
@@ -38,6 +57,9 @@ window.onload = function () {
 					d.x = d3.event.x;
 					d.y = d3.event.y;
 					d3.select(this).attr('cx', d.x).attr('cy', d.y);
+					label.filter(function (l) {
+						return l === d;
+					}).attr('x', d.x).attr('y', d.y - 5);
 					link.filter(function (l) {
 						return l.source === d;
 					}).attr("x1", d.x).attr("y1", d.y);
@@ -76,9 +98,7 @@ window.onload = function () {
 		.attr('width', width)
 		.attr('height', height);
 
-	node = svg.append('g')
-		.attr('class', 'node')
-		.selectAll('circle');
+	gnode = svg.selectAll('g');
 
 	link = svg.append('g')
 		.attr('class', 'link')
@@ -89,26 +109,29 @@ window.onload = function () {
 
 		insertLink(link, jsonData);
 
-		insertNode(node, jsonData);
+		insertNode(gnode, jsonData);
 	});
 
 	/* controls */
 	document.querySelector('#addNode').addEventListener('click', function () {
 		var a = {
-				x: document.querySelector('#x').value,
-				y: document.querySelector('#y').value
+				x: parseInt(document.querySelector('#x').value),
+				y: parseInt(document.querySelector('#y').value),
+				label: document.querySelector('#label').value
 			},
-			node = d3.select('body').select('.node').selectAll('circle'),
+			gnode = d3.select('body').select('svg').selectAll('.gnode'),
 			link = d3.select('body').select('.link').selectAll('line');
 
-		insertNode(node, a, 1);
+		insertNode(gnode, a, 1);
 
 		document.querySelector('#x').value = '';
 		document.querySelector('#y').value = '';
+		document.querySelector('#label').value = '';
 	});
 
 	document.querySelector('#removeAllNodes').addEventListener('click', function () {
-		d3.select('body').select('.node').selectAll('circle').remove();
+		d3.select('body').selectAll('.gnode').selectAll('circle').remove();
+		d3.select('body').selectAll('.gnode').selectAll('text').remove();
 		d3.select('body').select('.link').selectAll('line').remove();
 	});
 };
