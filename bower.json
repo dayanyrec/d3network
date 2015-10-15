@@ -1,0 +1,19 @@
+{
+  "name": "d3network",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dayanyrec/d3network",
+  "authors": [
+    "Dayany Espíndola <dayanyrec@gmail.com>",
+    "Diego Ramos <rdiego26@gmail.com>"
+  ],
+  "description": "Create interactive network using D3 library.",
+  "keywords": [
+    "d3",
+    "network"
+  ],
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "d3": "~3.5.6"
+  }
+}

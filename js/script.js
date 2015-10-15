@@ -5,7 +5,25 @@ window.onload = function () {
 		height = document.querySelector('.network').offsetHeight,
 		gnode,
 		link,
-		jsonData,
+		jsonData = {
+            "nodes": [
+                {
+                    "x": 100,
+                    "y": 100,
+                    "label": "1"
+                },
+                {
+                    "x": 200,
+                    "y": 200,
+                    "label": "2"
+                }
+            ],
+            "links": [{
+                "source": 1,
+                "target": 0
+            }]
+        }
+        ,
 		insertNode,
 		insertLink,
 		getData;
@@ -104,13 +122,8 @@ window.onload = function () {
 		.attr('class', 'link')
 		.selectAll('line');
 
-	d3.json('data.json', function (error, data) {
-		jsonData = data;
-
-		insertLink(link, jsonData);
-
-		insertNode(gnode, jsonData);
-	});
+    insertLink(link, jsonData);
+    insertNode(gnode, jsonData);
 
 	/* controls */
 	document.querySelector('#addNode').addEventListener('click', function () {

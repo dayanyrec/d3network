@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+# Ignore webstorm files
+.idea
+
+# Bower default folder
+bower_components
