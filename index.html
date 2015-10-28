@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload="d3network.init();">
 	<div class="row">
 		<div class="network"></div>
 		<div class="control">
@@ -20,8 +20,8 @@
 				<input type="text" name="y" id="y">
 				<label for="label">label:</label>
 				<input type="text" name="label" id="label">
-				<input type="button" value="Add node" id="addNode">
-				<input type="button" value="Remove all nodes" id="removeAllNodes">
+				<input type="button" value="Add node" id="addNode" onclick="d3network.addNode();">
+				<input type="button" value="Remove all nodes" id="removeAllNodes" onclick="d3network.removeAllNodes();">
 			</fieldset>
 		</div>
 	</div>
